@@ -1,16 +1,16 @@
 # 挂载WebDav
-CONFIG_PACKAGE_davfs2=y
+# CONFIG_PACKAGE_davfs2 is not set
 # Smart DNS
 CONFIG_PACKAGE_smartdns=y
 CONFIG_PACKAGE_luci-app-smartdns=y
 CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
-# Kernel 5.4
-# CONFIG_TESTING_KERNEL=y
+# Kernel 6.1.19
+CONFIG_TESTING_KERNEL=y
 # Theme
-CONFIG_PACKAGE_luci-theme-atmaterial-ColorIcon=y
+# CONFIG_PACKAGE_luci-theme-atmaterial-ColorIcon=y
 # CONFIG_PACKAGE_luci-theme-argon is not set
 CONFIG_PACKAGE_luci-theme-argon-mod=y
-CONFIG_PACKAGE_luci-theme-neobird=y
+# CONFIG_PACKAGE_luci-theme-neobird=y
 # passwall
 CONFIG_PACKAGE_luci-app-passwall=y
 # Adguard Home
@@ -34,9 +34,9 @@ CONFIG_TARGET_x86_64_DEVICE_generic=y
 
 CONFIG_GRUB_IMAGES=y
 CONFIG_VMDK_IMAGES=y
-CONFIG_VDI_IMAGES=y
-CONFIG_VHDX_IMAGES=y
-CONFIG_GRUB_TITLE="OpenWrt for x86_64-Z & Powered by Xinb"
+# CONFIG_VDI_IMAGES is not set
+# CONFIG_VHDX_IMAGES is not set
+CONFIG_GRUB_TITLE="OpenWrt for x86_64-Z-Dev & Powered by Xinb"
 CONFIG_TARGET_KERNEL_PARTSIZE=32
 CONFIG_TARGET_ROOTFS_PARTSIZE=800
 # CONFIG_GRUB_CONSOLE is not set

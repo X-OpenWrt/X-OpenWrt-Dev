@@ -19,7 +19,7 @@ on:
         default: 'true'
       Tempoary_IP:
         description: '固件 IP 地址 [可选]'
-        default: '192.168.2.200'
+        default: '192.168.2.100'
       Tempoary_CONFIG:
         description: '配置文件 [可选]'
         default: 'x86_64-Z'
@@ -258,7 +258,7 @@ jobs:
         sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
         sp_username: ${{ secrets.USERNAME }}
         sp_password: ${{ secrets.PASSWORD }}
-        sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+        sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
         sp_file_name: ${{ env.SP_UEFI_IMG_GZ }}
         file: openwrt/bin/Firmware/${{ env.SP_UEFI_IMG_GZ }}
 
@@ -269,7 +269,7 @@ jobs:
         sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
         sp_username: ${{ secrets.USERNAME }}
         sp_password: ${{ secrets.PASSWORD }}
-        sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+        sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
         sp_file_name: ${{ env.SP_UEFI_VMDK }}
         file: openwrt/bin/Firmware/${{ env.SP_UEFI_VMDK }}
 
@@ -280,7 +280,7 @@ jobs:
     #     sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
     #     sp_username: ${{ secrets.USERNAME }}
     #     sp_password: ${{ secrets.PASSWORD }}
-    #     sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+    #     sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
     #     sp_file_name: ${{ env.SP_UEFI_VDI }}
     #     file: openwrt/bin/Firmware/${{ env.SP_UEFI_VDI }}
 
@@ -291,7 +291,7 @@ jobs:
     #     sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
     #     sp_username: ${{ secrets.USERNAME }}
     #     sp_password: ${{ secrets.PASSWORD }}
-    #     sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+    #     sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
     #     sp_file_name: ${{ env.SP_UEFI_VHDX }}
     #     file: openwrt/bin/Firmware/${{ env.SP_UEFI_VHDX }}
 
@@ -302,7 +302,7 @@ jobs:
         sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
         sp_username: ${{ secrets.USERNAME }}
         sp_password: ${{ secrets.PASSWORD }}
-        sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+        sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
         sp_file_name: ${{ env.SP_LEGACY_IMG_GZ }}
         file: openwrt/bin/Firmware/${{ env.SP_LEGACY_IMG_GZ }}
 
@@ -313,7 +313,7 @@ jobs:
         sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
         sp_username: ${{ secrets.USERNAME }}
         sp_password: ${{ secrets.PASSWORD }}
-        sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+        sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
         sp_file_name: ${{ env.SP_LEGACY_VMDK }}
         file: openwrt/bin/Firmware/${{ env.SP_LEGACY_VMDK }}
 
@@ -324,7 +324,7 @@ jobs:
     #     sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
     #     sp_username: ${{ secrets.USERNAME }}
     #     sp_password: ${{ secrets.PASSWORD }}
-    #     sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+    #     sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
     #     sp_file_name: ${{ env.SP_LEGACY_VDI }}
     #     file: openwrt/bin/Firmware/${{ env.SP_LEGACY_VDI }}
 
@@ -335,7 +335,7 @@ jobs:
     #     sp_url: https://xinbao.sharepoint.com/:f:/r/sites/OpenWrt
     #     sp_username: ${{ secrets.USERNAME }}
     #     sp_password: ${{ secrets.PASSWORD }}
-    #     sp_folder: /Shared Documents/OpenWrt/${{ steps.date.outputs.date }}
+    #     sp_folder: /Shared Documents/OpenWrt/Dev/${{ steps.date.outputs.date }}
     #     sp_file_name: ${{ env.SP_LEGACY_VHDX }}
     #     file: openwrt/bin/Firmware/${{ env.SP_LEGACY_VHDX }}
 
