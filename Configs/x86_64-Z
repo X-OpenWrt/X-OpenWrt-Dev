@@ -43,8 +43,8 @@ CONFIG_TARGET_ROOTFS_PARTSIZE=800
 CONFIG_TARGET_IMAGES_GZIP=y
 CONFIG_PACKAGE_ntfs3-mount=y
 #禁用AMD GPU
-CONFIG_PACKAGE_amdgpu-firmware is not set
-CONFIG_DEFAULT_kmod-drm-amdgpu is not set
+#CONFIG_PACKAGE_amdgpu-firmware is not set
+#CONFIG_DEFAULT_kmod-drm-amdgpu is not set
 
 # CONFIG_SIGNATURE_CHECK is not set
 # CONFIG_SIGNED_PACKAGES is not set
