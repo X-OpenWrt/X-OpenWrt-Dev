@@ -343,6 +343,7 @@ jobs:
       if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && env.Result == 'true' && !cancelled()
       run: |
         rm openwrt/bin/Firmware/AutoBuild-*.v* -rf
+        ls -l openwrt/bin/Firmware/*
 
     - name: Upload Firmware to Github Release
       uses: svenstaro/upload-release-action@v2
