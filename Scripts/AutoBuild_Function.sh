@@ -126,7 +126,7 @@ Firmware_Diy_Main() {
 	chmod 777 -R ${Scripts} ${CustomFiles}
 	if [[ ${AutoBuild_Features} == true ]]
 	then
-		AddPackage git other AutoBuild-Packages xopenwrt master
+		AddPackage git other AutoBuild-Packages-dev X-OpenWrt master
 		echo -e "\nCONFIG_PACKAGE_luci-app-autoupdate=y" >> ${CONFIG_FILE}
 		for i in ${GITHUB_ENV} $(PKG_Finder d package AutoBuild-Packages)/autoupdate/files/etc/autoupdate/default
 		do

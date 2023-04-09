@@ -1,3 +1,11 @@
+## **当前与主分支差别**
+- AutoBuild Package仓库为当前的Dev
+- 内核为Testing版本，即6.1或更新。
+- `Z`删除`luci-theme-neobird`、`luci-theme-atmaterial-ColorIcon`、`davfs2`
+- 默认IP为`192.168.2.100`
+- 添加了两个测试主题，添加了iStore
+
+
 ## **OpenWrt下载说明**
 - 可在 [Release](https://github.com/xopenwrt/X-OpenWrt-New/releases/tag/AutoUpdate) 页面下载 `img.gz` 格式的文件
 - 可在 [Cloud-Openwrt](https://openwrt.115115.xyz/)下载    `VMDK` 虚拟磁盘文件

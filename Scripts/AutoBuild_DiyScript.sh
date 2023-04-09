@@ -76,16 +76,20 @@ EOF
 			sed -i 's/..\/..\//\$\(TOPDIR\)\/feeds\/luci\//g' ${WORK}/package/apps/luci-app-${i}/Makefile
 		done ; unset i
 
-		AddPackage svn apps minieap immortalwrt/packages/branches/openwrt-18.06/net
-		AddPackage git other luci-theme-atmaterial-ColorIcon esirplayground master
-		AddPackage git lean luci-app-argon-config jerrykuku master
-		AddPackage git other OpenClash vernesong master
-		AddPackage git other luci-app-vssr jerrykuku master
-		AddPackage git other lua-maxminddb jerrykuku master
-		AddPackage git other luci-theme-neobird thinktip main
-		AddPackage git other luci-app-ikoolproxy iwrt main
-		AddPackage git other helloworld fw876 master
-		AddPackage git other luci-app-smartdns pymumu lede
+		AddPackage svn apps  minieap immortalwrt/packages/branches/openwrt-18.06/net
+		AddPackage git other luci-theme-atmaterial-ColorIcon esirplayground   master
+		AddPackage git lean  luci-app-argon-config           jerrykuku        master
+		AddPackage git other OpenClash                       vernesong        master
+		AddPackage git other luci-app-vssr                   jerrykuku        master
+		AddPackage git other lua-maxminddb                   jerrykuku        master
+		AddPackage git other luci-theme-neobird              thinktip         main
+		AddPackage git other luci-app-ikoolproxy             iwrt             main
+		AddPackage git other helloworld                      fw876            master
+		AddPackage git other luci-app-smartdns               pymumu           lede
+		# for test:git dir   pkg_name                        user             branches
+ 		AddPackage git other luci-theme-infinityfreedom      xiaoqingfengATGH master
+		AddPackage git other luci-theme-edge                 kiddin9          master
+
 		# sed -i 's/143/143,8080,8443,6969,1337/' $(PKG_Finder d package luci-app-ssr-plus)/root/etc/init.d/shadowsocksr
 		
 		for x in $(ls -1 ${CustomFiles}/Patches/luci-app-shadowsocksr)

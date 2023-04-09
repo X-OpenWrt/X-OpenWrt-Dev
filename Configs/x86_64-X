@@ -169,6 +169,13 @@ CONFIG_PACKAGE_luci-ssl-openssl=y
 CONFIG_PACKAGE_luci-theme-argon-mod=y
 CONFIG_PACKAGE_luci-theme-netgear=y
 
+# 新主题测试段
+CONFIG_PACKAGE_luci-theme-infinityfreedom=y
+CONFIG_PACKAGE_luci-theme-edge=y
+# 新包测试段
+# 应用商店
+CONFIG_PACKAGE_luci-app-store=y
+
 # Appliciations
 CONFIG_PACKAGE_adb=y
 # CONFIG_PACKAGE_autosamba is not set
@@ -224,3 +231,4 @@ CONFIG_PACKAGE_xray-geodata=y
 CONFIG_PACKAGE_xz=y
 CONFIG_PACKAGE_xz-utils=y
 CONFIG_PACKAGE_xl2tpd=y
+
