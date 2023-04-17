@@ -4,6 +4,7 @@
 - `Z`删除`luci-theme-neobird`、`luci-theme-atmaterial-ColorIcon`、`davfs2`
 - 默认IP为`192.168.2.100`
 - 添加了两个测试主题，添加了iStore
+- 由于 [这个问题](https://github.com/coolsnowwolf/lede/issues/10976) ，在`X`分支暂不使用`6.1`内核
 
 
 ## **OpenWrt下载说明**
