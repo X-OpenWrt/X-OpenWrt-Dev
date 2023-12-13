@@ -17,7 +17,7 @@ do
         name_version=$make_name"="$pkg_version
         if [ "$pkg_version" != "" ]
         then
-                echo $name_version >> ${GITHUB_WORKSPACE}make.version
+                echo $name_version >> ${GITHUB_WORKSPACE}/make.version
                 echo $name_version
 
         fi
