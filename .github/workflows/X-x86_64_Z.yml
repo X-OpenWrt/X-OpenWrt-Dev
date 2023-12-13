@@ -189,48 +189,7 @@ jobs:
 
     - name: Check Pkg&Feeds Version
       run: |
-        find openwrt/package -type f | grep Makefile > version.cache
-        while read -r make_path
-        do
-          make_name_all=${make_path%/*}
-          echo $make_name_all
-          make_name=${make_name_all##*/}
-          pkg_version=`cat $make_path | grep PKG_VERSION:=`
-          if  [ "$pkg_version" = "" ]
-          then
-              pkg_version=`cat $make_path | grep PKG_VERSION=`
-          fi
-          # echo $pkg_version
-          echo $make_name_all
-          pkg_version=${pkg_version#*=}
-          name_version=$make_name"="$pkg_version
-          if [ "$pkg_version" != "" ]
-          then
-              echo $name_version >> make.version
-              echo $name_version
-          fi
-        done < "version.cache"
-
-        find openwrt/feeds -type f | grep Makefile > version.cache
-        while read -r make_path
-        do
-          make_name_all=${make_path%/*}
-          make_name=${make_name_all##*/}
-          pkg_version=`cat $make_path | grep PKG_VERSION:=`
-          if  [ "$pkg_version" = "" ]
-          then
-              pkg_version=`cat $make_path | grep PKG_VERSION=`
-          fi
-          # echo $pkg_version
-          echo $make_name_all
-          pkg_version=${pkg_version#*=}
-          name_version=$make_name"="$pkg_version
-          if [ "$pkg_version" != "" ]
-          then
-              echo $name_version >> make.version
-              echo $name_version
-          fi
-        done < "version.cache"
+        bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
 
     - name: Build OpenWrt
       run: |
