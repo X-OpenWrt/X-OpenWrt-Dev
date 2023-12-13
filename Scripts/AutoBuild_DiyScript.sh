@@ -70,7 +70,7 @@ EOF
 		# sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/luci/Makefile
 		# sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase="/luci-static/argon-mod"' $(PKG_Finder d package default-settings)/files/zzz-default-settings
 		
-		for i in eqos mentohust minieap unblockneteasemusic
+		for i in eqos mentohust minieap unblockneteasemusic-go
 		do
 			AddPackage svn apps luci-app-${i} immortalwrt/luci/branches/openwrt-18.06/applications
 			sed -i 's/..\/..\//\$\(TOPDIR\)\/feeds\/luci\//g' ${WORK}/package/apps/luci-app-${i}/Makefile
@@ -116,7 +116,8 @@ EOF
 		;;
 		x86_64)
 			Copy ${CustomFiles}/Depends/cpuset ${BASE_FILES}/bin
-			AddPackage git passwall-depends openwrt-passwall xiaorouji packages
+			AddPackage git passwall-depends openwrt-passwall-packages xiaorouji main
+			AddPackage git passwall-luci openwrt-passwall xiaorouji main
 			AddPackage git passwall2-luci openwrt-passwall2 xiaorouji main
 			AddPackage git other luci-app-dockerman lisaac master
 			rm -rf packages/lean/autocore
