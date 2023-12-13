@@ -187,9 +187,37 @@ jobs:
         make defconfig
         make download -j8
 
+    - name: Check Pkg&Feeds Version
+      run: |
+        find openwrt/package -type f | grep Makefile > version.cache
+        find openwrt/feeds -type f | grep Makefile >> version.cache
+        while read -r make_path
+        do
+              make_name_all=${make_path%/*}
+              make_name=${make_name_all##*/}
+              pkg_version=`cat $make_path | grep PKG_VERSION:=`
+              if  [ "$pkg_version" = "" ]
+              then
+                      pkg_version=`cat $make_path | grep PKG_VERSION=`
+              fi
+              # echo $pkg_version
+              # echo $make_name_all
+              pkg_version=${pkg_version#*=}
+              name_version=$make_name"="$pkg_version
+              if [ "$pkg_version" != "" ]
+              then
+                      echo $name_version >> make.version
+                      echo $name_version
+      
+              fi
+        done < "version.cache"
+
     - name: Build OpenWrt
       run: |
         cd openwrt
+        rm package/feeds/packages/adguardhome -rf
+        rm feeds/packages/net/adguardhome -rf
+        ln -s ../../../package/other/AutoBuild-Packages/adguardhome package/feeds/packages/adguardhome
         make -j4 || make -j1 V=s
         [ "$?" == 0 ] && echo "Result=true" >> $GITHUB_ENV || echo "Result=false" >> $GITHUB_ENV
 
@@ -344,7 +372,27 @@ jobs:
       run: |
         rm openwrt/bin/Firmware/AutoBuild-*.v* -rf
 
-    - name: Upload Firmware to Github Release
+
+    - name: Delete current release assets
+      uses: andreaswilli/delete-release-assets-action@<version>
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # tagPrefix: v
+        deleteOnlyFromDrafts: false
+        tag: AutoUpdate
+      
+    - name: Upload Package Version to Github Release
+      uses: svenstaro/upload-release-action@v2
+      if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && env.Result == 'true' && !cancelled()
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: make.version
+        file_glob: true
+        tag: v${{ steps.date.outputs.date }}
+        overwrite: true
+
+
+    - name: Upload Firmware to Github Release AutoUpdate
       uses: svenstaro/upload-release-action@v2
       if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && env.Result == 'true' && !cancelled()
       with:
@@ -353,6 +401,18 @@ jobs:
         file_glob: true
         tag: AutoUpdate
         overwrite: true
+
+    - name: Upload Firmware to Github Release
+      uses: svenstaro/upload-release-action@v2
+      if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && env.Result == 'true' && !cancelled()
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: openwrt/bin/Firmware/*
+        file_glob: true
+        tag: v${{ steps.date.outputs.date }}
+        overwrite: true
+
+
 
     - name: Upload API to Github Release
       if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && env.Result == 'true' && !cancelled()

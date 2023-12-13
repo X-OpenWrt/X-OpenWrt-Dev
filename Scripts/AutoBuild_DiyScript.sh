@@ -80,7 +80,7 @@ EOF
 		AddPackage git     other luci-theme-atmaterial-ColorIcon esirplayground   master
 		AddPackage git     lean  luci-app-argon-config           jerrykuku        master
 		AddPackage git     other OpenClash                       vernesong        master
-		AddPackage git     other luci-app-vssr                   jerrykuku        master
+		# AddPackage git     other luci-app-vssr                   jerrykuku        master
 		AddPackage git     other lua-maxminddb                   jerrykuku        master
 		AddPackage git     other luci-theme-neobird              thinktip         main
 		AddPackage git     other luci-app-ikoolproxy             iwrt             main
@@ -117,7 +117,7 @@ EOF
 		x86_64)
 			Copy ${CustomFiles}/Depends/cpuset ${BASE_FILES}/bin
 			AddPackage git passwall-depends openwrt-passwall xiaorouji packages
-			AddPackage git passwall-luci openwrt-passwall xiaorouji luci
+			AddPackage git passwall2-luci openwrt-passwall2 xiaorouji main
 			AddPackage git other luci-app-dockerman lisaac master
 			rm -rf packages/lean/autocore
 			AddPackage git lean autocore-modify xopenwrt master

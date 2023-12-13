@@ -13,7 +13,7 @@ CONFIG_PACKAGE_luci-theme-atmaterial-ColorIcon=y
 CONFIG_PACKAGE_luci-theme-argon-mod=y
 CONFIG_PACKAGE_luci-theme-neobird=y
 # passwall
-CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_luci-app-passwall2=y
 # Adguard Home
 CONFIG_PACKAGE_luci-app-adguardhome=y
 # Dnsmasq 及IPV6,AutoUpdate
