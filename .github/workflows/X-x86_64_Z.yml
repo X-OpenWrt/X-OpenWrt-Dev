@@ -193,6 +193,7 @@ jobs:
         while read -r make_path
         do
           make_name_all=${make_path%/*}
+          echo $make_name_all
           make_name=${make_name_all##*/}
           pkg_version=`cat $make_path | grep PKG_VERSION:=`
           if  [ "$pkg_version" = "" ]
@@ -209,7 +210,7 @@ jobs:
               echo $name_version
           fi
         done < "version.cache"
-        
+
         find openwrt/feeds -type f | grep Makefile > version.cache
         while read -r make_path
         do
