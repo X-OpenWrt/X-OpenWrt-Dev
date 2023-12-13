@@ -133,7 +133,7 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
         if [ "${{ env.DELETE_USELESS_FILES }}" == true ]
         then
-            docker rmi node:18 node:18-alpine node:14-alpine node:16-alpine alpine:3.16 alpine:3.17 alpine:3.18 moby/buildkit:latest node:16 node:14 ubuntu:20.04 buildpack-deps:stretch buildpack-deps:buster buildpack-deps:bullseye debian:9 debian:10 debian:11 ubuntu:18.04 ubuntu:16.04 
+            docker rmi node:18 node:18-alpine node:16-alpine alpine:3.16 alpine:3.17 alpine:3.18 moby/buildkit:latest node:16 ubuntu:20.04 buildpack-deps:stretch buildpack-deps:buster buildpack-deps:bullseye debian:9 debian:10 debian:11
             sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php
             sudo -E apt-get -y autoremove --purge
             sudo -E apt-get clean
