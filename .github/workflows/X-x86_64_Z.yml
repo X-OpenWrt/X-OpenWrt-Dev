@@ -197,7 +197,6 @@ jobs:
       run: |
         source $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
         Get_Version
-        # echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT
 
     - name: Upload Package Version to Github Release
       uses: svenstaro/upload-release-action@v2
