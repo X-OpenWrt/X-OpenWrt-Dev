@@ -74,6 +74,7 @@ done < "version.cache"
 wget https://api.github.com/repos/X-OpenWrt/X-OpenWrt-Dev/releases -O releases.json
 cat releases.json | jq  '.[].tag_name' -r > version.old
 
+echo $NOW_DATA_VERSION
 diff_version=v2023-1-1
 while read -r last_version
 do
