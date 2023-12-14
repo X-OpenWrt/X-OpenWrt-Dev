@@ -63,15 +63,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
 
-    - name: Set env & Echo System Info
-      id: date
-      run: |
-        echo "::set-output name=date::$(date +'%Y-%m-%d')"
-        NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
-        echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
-        echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
-        bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
-
     - name: Maximize Build Space
       uses: easimon/maximize-build-space@master
       with:
@@ -84,6 +75,15 @@ jobs:
       uses: actions/checkout@main
       with:
         fetch-depth: 0
+
+    - name: Set env & Echo System Info
+      id: date
+      run: |
+        echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
+        echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
+        echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
+        bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
 
     - name: Load Custom Variables
       run: |
