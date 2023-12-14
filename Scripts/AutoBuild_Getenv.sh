@@ -1,7 +1,7 @@
 #!/bin/bash
 # AutoBuild Module by Xinb/Xinbyte <https://github.com/xopenwrt/X-OpenWrt-New>
 # AutoBuild Functions
-
+Get_Action_Info() {
 echo "---------------------------- Soc Info | 🏅AMD Yes ----------------------------"
 lscpu | grep "Model name" 
 lscpu | grep "CPU(s)" 
@@ -15,3 +15,4 @@ echo "------------------------------- IP Address Info --------------------------
 IP=`curl ip.115115.xyz -s`
 curl -s https://searchplugin.csdn.net/api/v1/ip/get?ip=${IP} | jq -r .data.address
 echo ${NOW_DATA_VERSION}
+}

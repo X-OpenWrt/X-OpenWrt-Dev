@@ -84,7 +84,8 @@ jobs:
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
         chmod +x $GITHUB_WORKSPACE/Scripts/AutoBuild_*.sh
-        $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
+        source $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
+        Get_Action_Info
 
     - name: Load Custom Variables
       run: |
@@ -169,7 +170,7 @@ jobs:
 
     - name: Run Diy Scripts
       run: |
-        # chmod +x Scripts/AutoBuild_*.sh
+        chmod +x Scripts/AutoBuild_*.sh
         cd openwrt
         if [ "${{ env.CACHE_ACCELERATE }}" == true ]
         then
@@ -194,7 +195,8 @@ jobs:
 
     - name: Check Pkg&Feeds Version
       run: |
-        $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
+        source $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
+        Get_Version
         # echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT
 
     - name: Upload Package Version to Github Release
