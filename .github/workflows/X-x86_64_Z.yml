@@ -191,6 +191,16 @@ jobs:
       run: |
         bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
 
+    - name: Upload Package Version to Github Release
+      uses: svenstaro/upload-release-action@v2
+      if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && !cancelled()
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: make.version
+        file_glob: true
+        tag: v${{ steps.date.outputs.date }}
+        overwrite: true
+
     - name: Build OpenWrt
       run: |
         cd openwrt
