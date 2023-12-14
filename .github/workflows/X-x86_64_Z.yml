@@ -62,6 +62,23 @@ jobs:
   Compile:
     runs-on: ubuntu-20.04
     steps:
+
+    - name: Set env & Echo System Info
+      id: date
+      run: |
+        echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
+        echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
+        echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
+        echo "Soc Info"
+        lscpu
+        echo "Memory Info"
+        free -m
+        echo "Disk Info"
+        lsblk
+        echo "Disk Usage Info"
+        df -h
+
     - name: Maximize Build Space
       uses: easimon/maximize-build-space@master
       with:
@@ -70,13 +87,6 @@ jobs:
         remove-dotnet: 'true'
         remove-android: 'true'
 
-    - name: Get current date & Set env
-      id: date
-      run: |
-        echo "::set-output name=date::$(date +'%Y-%m-%d')"
-        NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
-        echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
-        echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
     - name: Checkout
       uses: actions/checkout@main
       with:

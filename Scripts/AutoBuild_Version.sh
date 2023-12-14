@@ -1,4 +1,5 @@
 #!/bin/bash
+
 OPENWRT_BUILD_DIR=${GITHUB_WORKSPACE}/openwrt
 find ${OPENWRT_BUILD_DIR}/package -type f | grep Makefile > ${GITHUB_WORKSPACE}/version.cache
 find ${OPENWRT_BUILD_DIR}/feeds -type f | grep Makefile >> ${GITHUB_WORKSPACE}/version.cache
