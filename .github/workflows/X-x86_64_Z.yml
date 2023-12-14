@@ -84,7 +84,7 @@ jobs:
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
         chmod +x $GITHUB_WORKSPACE/Scripts/AutoBuild_*.sh
-        ./$GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
+        $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
 
     - name: Load Custom Variables
       run: |
@@ -194,7 +194,7 @@ jobs:
 
     - name: Check Pkg&Feeds Version
       run: |
-        ./$GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
+        $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
         # echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT
 
     - name: Upload Package Version to Github Release
