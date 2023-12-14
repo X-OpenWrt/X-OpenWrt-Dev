@@ -4,6 +4,7 @@
 
 echo "---------------------------- Soc Info | 🏅AMD Yes ----------------------------"
 lscpu | grep "Model name" 
+lscpu | grep "CPU(s)" 
 echo "--------------------------------- Memory Info --------------------------------"
 free -m
 echo "---------------------------------- Disk Info ---------------------------------"
@@ -11,4 +12,5 @@ lsblk
 echo "------------------------------- Disk Usage Info ------------------------------"
 df -h
 echo "------------------------------- IP Address Info ------------------------------"
-curl ip.115115.xyz
+IP=`curl ip.115115.xyz -s`
+curl -s https://searchplugin.csdn.net/api/v1/ip/get?ip=${IP} | jq -r .data.address
