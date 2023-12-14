@@ -74,6 +74,7 @@ jobs:
       id: date
       run: |
         echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
     - name: Checkout
@@ -190,6 +191,7 @@ jobs:
     - name: Check Pkg&Feeds Version
       run: |
         bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
+        # echo "RELEASE_BODY=$r" >> $GITHUB_OUTPUT
 
     - name: Upload Package Version to Github Release
       uses: svenstaro/upload-release-action@v2
@@ -200,6 +202,18 @@ jobs:
         file_glob: true
         tag: v${{ steps.date.outputs.date }}
         overwrite: true
+
+    - name: Upload Package Version to Github Release
+      uses: svenstaro/upload-release-action@v2
+      if: env.Release=='true' && env.UPLOAD_RELEASES == 'true' && !cancelled()
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: diff.log
+        file_glob: true
+        tag: v${{ steps.date.outputs.date }}
+        body: "diff.log Test"
+        overwrite: true
+        
 
     - name: Build OpenWrt
       run: |
