@@ -13,27 +13,27 @@ do
         make_name=${make_name_all##*/}
 
         pkg_version=`cat $make_path | grep PKG_VERSION:=`
-	if ["$make_name" = "dnsmasq"]
+	if [ "$make_name" = "dnsmasq" ]
 	then
                 pkg_version=`cat $make_path | grep PKG_UPSTREAM_VERSION:=`
 	fi
 
-	if ["$make_name" = "ppp"]
+	if [ "$make_name" = "ppp" ]
 	then
                 pkg_version=`cat $make_path | grep PKG_RELEASE_VERSION:=`
 	fi
 
-	if ["$make_name" = "bpf-headers"]
+	if [ "$make_name" = "bpf-headers" ]
 	then
                 pkg_version=`cat $make_path | grep PKG_PATCHVER:=`
 	fi
 
-        if ["$make_name" = "dsl-vrx200-firmware-xdsl"]
+        if [ "$make_name" = "dsl-vrx200-firmware-xdsl" ]
         then
                 pkg_version=""
         fi
 
-        if ["$make_name" = "perf"]
+        if [ "$make_name" = "perf" ]
         then
                 pkg_version=${X_LINUX_VERSION}
         fi
