@@ -70,14 +70,7 @@ jobs:
         NOW_DATA_VERSION=v$(date +'%Y-%m-%d')
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
-        echo "Soc Info"
-        lscpu
-        echo "Memory Info"
-        free -m
-        echo "Disk Info"
-        lsblk
-        echo "Disk Usage Info"
-        df -h
+        bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Getenv.sh
 
     - name: Maximize Build Space
       uses: easimon/maximize-build-space@master

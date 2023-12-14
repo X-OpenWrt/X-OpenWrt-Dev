@@ -77,11 +77,14 @@ cat releases.json | jq  '.[].tag_name' -r > version.old
 diff_version=v2023-1-1
 while read -r last_version
 do
-        if [[ "last_version" < ${NOW_DATA_VERSION} ]]
+        if [[ "$last_version" != "AutoUpdate" ]]
         then
-                if [[ "last_version" > ${diff_version} ]]
+                if [[ "$last_version" < ${NOW_DATA_VERSION} ]]
                 then
-                        diff_version=last_version
+                        if [[ "$last_version" > ${diff_version} ]]
+                        then
+                                diff_version=$last_version
+                        fi
                 fi
         fi
 done < "version.old"
