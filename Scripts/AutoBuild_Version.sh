@@ -72,13 +72,13 @@ done < "version.cache"
 
 wget https://api.github.com/repos/X-OpenWrt/X-OpenWrt-Dev/releases -O releases.json
 cat releases.json | jq  '.[].tag_name' -r > version.old
-echo ${{env.NOW_DATA_VERSION}}
+echo ${NOW_DATA_VERSION}
 diff_version=v2023-1-1
 while read -r last_version
 do
         if [[ "$last_version" != "AutoUpdate" ]]
         then
-                if [[ "$last_version" < ${{env.NOW_DATA_VERSION}} ]]
+                if [[ "$last_version" < ${NOW_DATA_VERSION} ]]
                 then
                         if [[ "$last_version" > ${diff_version} ]]
                         then
