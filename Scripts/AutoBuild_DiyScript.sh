@@ -121,6 +121,7 @@ EOF
 			AddPackage git passwall2-luci openwrt-passwall2 xiaorouji main
 			AddPackage git other luci-app-dockerman lisaac master
 			rm -rf packages/lean/autocore
+			rm -rf feeds/luci/themes/luci-theme-argon
 			AddPackage git lean autocore-modify xopenwrt master
 			sed -i -- 's:/bin/ash:'/bin/bash':g' ${BASE_FILES}/etc/passwd
 			#sed -i "s?6.0?5.19?g" ${WORK}/target/linux/x86/Makefile

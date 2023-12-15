@@ -41,8 +41,8 @@ CONFIG_PACKAGE_ntfs3-mount=y
 
 # Theme 测试通过
 # CONFIG_PACKAGE_luci-theme-atmaterial-ColorIcon is not set
-# CONFIG_PACKAGE_luci-theme-argon is not set
-CONFIG_PACKAGE_luci-theme-argon-mod=y
+CONFIG_PACKAGE_luci-theme-argon=y
+# CONFIG_PACKAGE_luci-theme-argon-mod is not set
 # CONFIG_PACKAGE_luci-theme-neobird is not set
 
 # 新主题测试段
