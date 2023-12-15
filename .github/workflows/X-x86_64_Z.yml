@@ -197,6 +197,7 @@ jobs:
     - name: Check Pkg&Feeds Version
       run: |
         export NOW_DATA_VERSION=${{env.NOW_DATA_VERSION}}
+        export GITHUB_WORKSPACE
         bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
 
     - name: Upload Package Version to Github Release
