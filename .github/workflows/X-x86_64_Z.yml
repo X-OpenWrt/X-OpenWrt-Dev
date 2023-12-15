@@ -179,6 +179,7 @@ jobs:
         cp $GITHUB_WORKSPACE/Configs/$CONFIG_FILE .config
         source $GITHUB_WORKSPACE/Scripts/AutoBuild_DiyScript.sh
         source $GITHUB_WORKSPACE/Scripts/AutoBuild_Function.sh
+        source $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
         make defconfig
         Firmware_Diy_Before
         rm -f .config && cp $GITHUB_WORKSPACE/Configs/$CONFIG_FILE .config
@@ -195,7 +196,6 @@ jobs:
 
     - name: Check Pkg&Feeds Version
       run: |
-        source $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
         Get_Version
 
     - name: Upload Package Version to Github Release
