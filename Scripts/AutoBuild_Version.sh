@@ -4,13 +4,14 @@ Check_Version(){
         pkg_line=$1
         pkg_name=${pkg_line%=*}
         pkg_new_version=${pkg_line#*=}
-        pkg_info=`cat last.version | grep "^$pkg_name="`
+        pkg_info=`cat last.version | grep "^$pkg_name=" -m 1 `
         pkg_old_version=${pkg_info#*=}
         if [ "$pkg_old_version" != "$pkg_new_version" ]
         then
                 if [ "$pkg_old_version" != "" ]
                 then
                         echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version" >>diff.log
+                        echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version"
                 else
                         echo "Add ${pkg_name}" >> diff.log 
                 fi
@@ -84,7 +85,7 @@ do
         if [ "$pkg_version" != "" ]
         then
                 echo $name_version >> ${GITHUB_WORKSPACE}/make.version
-                echo $name_version
+                # echo $name_version
 
         fi
 done < "version.cache"
