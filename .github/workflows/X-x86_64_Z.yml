@@ -79,7 +79,8 @@ jobs:
     - name: Set env & Echo System Info
       id: date
       run: |
-        echo "data=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+        echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        echo "data2=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
         echo "NOW_DATA_VERSION=v$(date +'%Y-%m-%d')" >> $GITHUB_ENV
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
@@ -197,7 +198,7 @@ jobs:
     - name: Check Pkg&Feeds Version
       run: |
         export NOW_DATA_VERSION=${{env.NOW_DATA_VERSION}}
-        export GITHUB_WORKSPACE
+        export GITHUB_WORKSPACE=$GITHUB_WORKSPACE
         bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
 
     - name: Upload Package Version to Github Release
@@ -218,7 +219,7 @@ jobs:
         file: diff.log
         file_glob: true
         tag: v${{ steps.date.outputs.date }}
-        body: "diff.log Test"
+        body: ${{ steps.date.outputs.date2 }}
         overwrite: true
         
 
