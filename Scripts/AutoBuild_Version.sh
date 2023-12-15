@@ -1,4 +1,22 @@
 #!/bin/bash
+
+Check_Version( pkg_line ){
+        pkg_name=${pkg_line%=*}
+        pkg_new_version=${pkg_line#*=}
+        pkg_info=`cat last.version | grep "^$pkg_name="`
+        pkg_old_version=${pkg_info#*=}
+        if [ "$pkg_old_version" != "$pkg_new_version" ]
+        then
+                if [ "$pkg_old_version" != "" ]
+                then
+                        echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version" >>diff.log
+                else
+                        echo "Add ${pkg_name}" >> diff.log 
+                fi
+        fi
+
+}
+
 OPENWRT_BUILD_DIR=${GITHUB_WORKSPACE}/openwrt
 find ${OPENWRT_BUILD_DIR}/package -type f | grep Makefile > ${GITHUB_WORKSPACE}/version.cache
 find ${OPENWRT_BUILD_DIR}/feeds -type f | grep Makefile >> ${GITHUB_WORKSPACE}/version.cache
@@ -14,7 +32,7 @@ do
         make_name_all=${make_path%/*}
         make_name=${make_name_all##*/}
 
-        pkg_version=`cat $make_path | grep PKG_VERSION:=`
+        pkg_version=`cat $make_path | grep "\bPKG_VERSION:="`
 	if [ "$make_name" = "dnsmasq" ]
 	then
                 pkg_version=`cat $make_path | grep PKG_UPSTREAM_VERSION:=`
@@ -42,7 +60,7 @@ do
 
         if  [ "$pkg_version" = "" ]
         then
-                pkg_version=`cat $make_path | grep PKG_VERSION=`
+                pkg_version=`cat $make_path | grep "\bPKG_VERSION="`
         fi
 
         # echo $pkg_version
@@ -88,5 +106,9 @@ do
         fi
 done < "version.old"
 wget -O last.version https://github.com/X-OpenWrt/X-OpenWrt-Dev/releases/download/${diff_version}/make.version
-diff -y last.version ${GITHUB_WORKSPACE}/make.version > ${GITHUB_WORKSPACE}/diff.log
+while read -r make_version_line
+do
+        Check_Version( make_version_line )
+done < "make.version"
+# diff -y last.version ${GITHUB_WORKSPACE}/make.version > ${GITHUB_WORKSPACE}/diff.log
 echo "Diff Finish!"
