@@ -1,6 +1,4 @@
 #!/bin/bash
-Get_Version() {
-sudo apt install jq
 OPENWRT_BUILD_DIR=${GITHUB_WORKSPACE}/openwrt
 find ${OPENWRT_BUILD_DIR}/package -type f | grep Makefile > ${GITHUB_WORKSPACE}/version.cache
 find ${OPENWRT_BUILD_DIR}/feeds -type f | grep Makefile >> ${GITHUB_WORKSPACE}/version.cache
@@ -91,5 +89,3 @@ do
 done < "version.old"
 wget -O last.version https://github.com/X-OpenWrt/X-OpenWrt-Dev/releases/download/${diff_version}/make.version
 diff -y last.version ${GITHUB_WORKSPACE}/make.version > ${GITHUB_WORKSPACE}/diff.log
-
-}

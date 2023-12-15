@@ -196,8 +196,7 @@ jobs:
 
     - name: Check Pkg&Feeds Version
       run: |
-        source $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
-        Get_Version
+        bash $GITHUB_WORKSPACE/Scripts/AutoBuild_Version.sh
 
     - name: Upload Package Version to Github Release
       uses: svenstaro/upload-release-action@v2
