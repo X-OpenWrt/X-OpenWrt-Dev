@@ -80,7 +80,7 @@ jobs:
       id: date
       run: |
         echo "data=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-        echo "NOW_DATA_VERSION=v$(date +'%Y-%m-%d')" >> $GITHUB)ENV
+        echo "NOW_DATA_VERSION=v$(date +'%Y-%m-%d')" >> $GITHUB_ENV
         echo "Release=${{ github.event.inputs.Release }}" >> $GITHUB_ENV
         echo "SharePoint=${{ github.event.inputs.SharePoint }}" >> $GITHUB_ENV
         chmod +x $GITHUB_WORKSPACE/Scripts/AutoBuild_*.sh
