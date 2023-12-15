@@ -79,6 +79,7 @@ EOF
 		AddPackage svn     apps  minieap immortalwrt/packages/branches/openwrt-18.06/net
 		AddPackage git     other luci-theme-atmaterial-ColorIcon esirplayground   master
 		AddPackage git     lean  luci-app-argon-config           jerrykuku        master
+		AddPackage git     lean  luci-theme-argon                jerrykuku        master
 		AddPackage git     other OpenClash                       vernesong        master
 		# AddPackage git     other luci-app-vssr                   jerrykuku        master
 		AddPackage git     other lua-maxminddb                   jerrykuku        master
