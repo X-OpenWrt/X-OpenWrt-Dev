@@ -34,7 +34,7 @@ do
         make_name_all=${make_path%/*}
         make_name=${make_name_all##*/}
 
-        pkg_version=`cat $make_path | grep "\bPKG_VERSION:="`
+        pkg_version=`cat $make_path | grep "\bPKG_VERSION:=" -m 1`
 	if [ "$make_name" = "dnsmasq" ]
 	then
                 pkg_version=`cat $make_path | grep PKG_UPSTREAM_VERSION:=`
@@ -55,6 +55,10 @@ do
                 pkg_version=""
         fi
 
+        if [ "$make_name" = "UnblockNeteaseMusic" ]
+        then
+                pkg_version=""
+        fi
         if [ "$make_name" = "perf" ]
         then
                 pkg_version=${X_LINUX_VERSION}
@@ -74,11 +78,11 @@ do
                 pkg_version=${pkg_version%*PKG_VERSION}
         fi
         
-        if [ "$make_name" = "dockerd" ]
-        then
-                pkg_version=`echo $pkg_version | sed s/[[:space:]]//g`
-                pkg_version=${pkg_version%*DEP_VER}
-        fi
+        # if [ "$make_name" = "dockerd" ]
+        # then
+        #         pkg_version=`echo $pkg_version | sed s/[[:space:]]//g`
+        #         pkg_version=${pkg_version%*DEP_VER}
+        # fi
 
         pkg_version=${pkg_version#*=}
         name_version=$make_name"="$pkg_version

@@ -85,8 +85,10 @@ EOF
 		AddPackage git     other lua-maxminddb                   jerrykuku        master
 		AddPackage git     other luci-theme-neobird              thinktip         main
 		AddPackage git     other luci-app-ikoolproxy             iwrt             main
-		AddPackage git     other helloworld                      fw876            master
+		AddPackage git     other helloworld                      fw876            master #ssr plus
 		AddPackage git     other luci-app-smartdns               pymumu           lede
+		rm -rf feeds/packages/net/smartdns
+
 		# for test:git     dir   pkg_name                        user/repo        branches
  		AddPackage git     other luci-theme-infinityfreedom      xiaoqingfengATGH master
 		AddPackage git-dir other luci-theme-edge                 kenzok8/small-package main
