@@ -89,3 +89,4 @@ do
 done < "version.old"
 wget -O last.version https://github.com/X-OpenWrt/X-OpenWrt-Dev/releases/download/${diff_version}/make.version
 diff -y last.version ${GITHUB_WORKSPACE}/make.version > ${GITHUB_WORKSPACE}/diff.log
+echo "Diff Finish!"
