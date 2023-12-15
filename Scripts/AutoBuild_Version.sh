@@ -1,6 +1,7 @@
 #!/bin/bash
 
-Check_Version( pkg_line ){
+Check_Version(){
+        pkg_line=$1
         pkg_name=${pkg_line%=*}
         pkg_new_version=${pkg_line#*=}
         pkg_info=`cat last.version | grep "^$pkg_name="`
@@ -108,7 +109,7 @@ done < "version.old"
 wget -O last.version https://github.com/X-OpenWrt/X-OpenWrt-Dev/releases/download/${diff_version}/make.version
 while read -r make_version_line
 do
-        Check_Version( make_version_line )
+        Check_Version $make_version_line
 done < "make.version"
 # diff -y last.version ${GITHUB_WORKSPACE}/make.version > ${GITHUB_WORKSPACE}/diff.log
 echo "Diff Finish!"
