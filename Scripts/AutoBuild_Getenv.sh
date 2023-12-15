@@ -20,7 +20,7 @@ curl ip.115115.xyz -s
 curl -s https://searchplugin.csdn.net/api/v1/ip/get?ip=${IP} | jq -r .data.address
 }
 
-Get_Release_Info(){
+Get_Release_Info() {
 echo "------------------------------- Build Version Data ----------------------------"
 echo ${NOW_DATA_VERSION}
 echo "------------------------------ Build Kernel Version ---------------------------"

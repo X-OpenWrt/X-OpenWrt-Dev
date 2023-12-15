@@ -1,5 +1,6 @@
 #!/bin/bash
 Get_Version() {
+sudo apt install jq
 OPENWRT_BUILD_DIR=${GITHUB_WORKSPACE}/openwrt
 find ${OPENWRT_BUILD_DIR}/package -type f | grep Makefile > ${GITHUB_WORKSPACE}/version.cache
 find ${OPENWRT_BUILD_DIR}/feeds -type f | grep Makefile >> ${GITHUB_WORKSPACE}/version.cache
@@ -74,13 +75,12 @@ done < "version.cache"
 wget https://api.github.com/repos/X-OpenWrt/X-OpenWrt-Dev/releases -O releases.json
 cat releases.json | jq  '.[].tag_name' -r > version.old
 
-echo ${NOW_DATA_VERSION}
 diff_version=v2023-1-1
 while read -r last_version
 do
         if [[ "$last_version" != "AutoUpdate" ]]
         then
-                if [[ "$last_version" < ${NOW_DATA_VERSION} ]]
+                if [[ "$last_version" < ${{ env.NOW_DATA_VERSION }} ]]
                 then
                         if [[ "$last_version" > ${diff_version} ]]
                         then
