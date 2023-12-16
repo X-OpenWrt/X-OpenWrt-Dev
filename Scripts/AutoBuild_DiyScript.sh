@@ -87,7 +87,7 @@ EOF
 		AddPackage git     other luci-app-ikoolproxy             iwrt             main
 		AddPackage git     other helloworld                      fw876            master #ssr plus
 		AddPackage git     other luci-app-smartdns               pymumu           lede
-		rm -rf feeds/packages/net/smartdns
+		rm -rf feeds/luci/applications/luci-app-smartdns
 
 		# for test:git     dir   pkg_name                        user/repo        branches
  		AddPackage git     other luci-theme-infinityfreedom      xiaoqingfengATGH master
