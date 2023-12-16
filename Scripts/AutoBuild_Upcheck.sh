@@ -21,7 +21,7 @@ Check_build_Version(){
 }
 
 cat openwrt/build_log.log  | grep "make\[3\]" | grep -E "package/|feeds/" > build_cmd.log
-cat build_cmd.log | awk '{print substr($1,1,8)}' > build_package.log
+cat build_cmd.log | awk '{print substr($3,1)}' > build_package.log
 
 X_LINUX_VERSION=`cat openwrt/target/linux/x86/Makefile | grep KERNEL_PATCHVER:=`
 X_LINUX_VERSION_TESTING=`cat openwrt/target/linux/x86/Makefile | grep KERNEL_TESTING_PATCHVER:=`
