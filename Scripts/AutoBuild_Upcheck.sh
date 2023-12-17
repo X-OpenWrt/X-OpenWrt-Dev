@@ -34,7 +34,7 @@ while read -r build_pkg_dir
 do
     build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile |  grep "\bPKG_VERSION:=" -m 1`
 
-	if [ "${build_pkg_dir##*/}" = "dnsmasq" ]
+        if [ "${build_pkg_dir##*/}" = "dnsmasq" ]
 	then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_UPSTREAM_VERSION:= -m 1`
 	fi
@@ -53,14 +53,17 @@ do
     then
         build_pkg_ver=""
     fi
+
     if [ "${build_pkg_dir##*/}" = "UnblockNeteaseMusic" ]
     then
         build_pkg_ver=""
     fi
+
     if [ "${build_pkg_dir##*/}" = "perf" ]
     then
         build_pkg_ver=${X_LINUX_VERSION}
     fi
+
     if [ "${build_pkg_dir##*/}" = "golang" ]
     then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep GO_VERSION_MAJOR_MINOR:= -m 1`
@@ -68,16 +71,19 @@ do
         GO_VERSION_PATCH=`cat openwrt/${build_pkg_dir}/Makefile | grep GO_VERSION_PATCH:= -m 1`
         GO_VERSION_PATCH=${GO_VERSION_PATCH#*=}
         build_pkg_ver=${build_pkg_ver}.${GO_VERSION_PATCH}
-        
     fi
+
     if  [ "$build_pkg_ver" = "" ]
     then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_VERSION=" -m 1`
     fi
+
     if  [ "$build_pkg_ver" = "" ]
     then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_RELEASE:=" -m 1`
     fi
+
+    if  [ "$build_pkg_ver" = "" ]
     then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_RELEASE=" -m 1`
     fi
