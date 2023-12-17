@@ -20,7 +20,7 @@ Check_build_Version(){
 
 }
 
-cat openwrt/build_log.log  | grep "make\[3\]" | grep -E "package/|feeds/" > build_cmd.log
+cat openwrt/build_log.log  | grep -v "host-compile" |grep "make\[3\]" | grep -E "package/|feeds/" > build_cmd.log
 cat build_cmd.log | awk '{print substr($3,1)}' > build_package.log
 
 X_LINUX_VERSION=`cat openwrt/target/linux/x86/Makefile | grep KERNEL_PATCHVER:=`
@@ -36,17 +36,17 @@ do
 
 	if [ "${build_pkg_dir##*/}" = "dnsmasq" ]
 	then
-        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_UPSTREAM_VERSION:=`
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_UPSTREAM_VERSION:= -m 1`
 	fi
 
 	if [ "${build_pkg_dir##*/}" = "ppp" ]
 	then
-        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_RELEASE_VERSION:=`
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_RELEASE_VERSION:= -m 1`
 	fi
 
 	if [ "${build_pkg_dir##*/}" = "bpf-headers" ]
 	then
-        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_PATCHVER:=`
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep PKG_PATCHVER:= -m 1`
 	fi
 
     if [ "${build_pkg_dir##*/}" = "dsl-vrx200-firmware-xdsl" ]
@@ -61,11 +61,28 @@ do
     then
         build_pkg_ver=${X_LINUX_VERSION}
     fi
-
+    if [ "${build_pkg_dir##*/}" = "golang" ]
+    then
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep GO_VERSION_MAJOR_MINOR:= -m 1`
+        build_pkg_ver=${build_pkg_ver#*=}
+        GO_VERSION_PATCH=`cat openwrt/${build_pkg_dir}/Makefile | grep GO_VERSION_PATCH:= -m 1`
+        GO_VERSION_PATCH=${GO_VERSION_PATCH#*=}
+        build_pkg_ver=${build_pkg_ver}.${GO_VERSION_PATCH}
+        
+    fi
     if  [ "$build_pkg_ver" = "" ]
     then
         build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_VERSION=" -m 1`
     fi
+    if  [ "$build_pkg_ver" = "" ]
+    then
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_RELEASE:=" -m 1`
+    fi
+    then
+        build_pkg_ver=`cat openwrt/${build_pkg_dir}/Makefile | grep "\bPKG_RELEASE=" -m 1`
+    fi
+
+    build_pkg_ver=${build_pkg_ver#*=}
     echo ${build_pkg_dir##*/}=$build_pkg_ver >> ${1}_build_pkg_ver.log
 done < "build_package.log"
 
