@@ -114,6 +114,7 @@ done < "version.old"
 wget -O ${1}_build_pkg_ver_old.log https://github.com/X-OpenWrt/X-OpenWrt-Dev/releases/download/${diff_version}/${1}_build_pkg_ver.log
 
 # Check_build_Version "LINUX_VERSION=${X_LINUX_VERSION}" ${1}
+echo "Tag:${X_BUILD_TAG} Vesion Check" >> ${X_BUILD_TAG}_build_pkg_up.log 
 while read -r make_version_line
 do
         Check_build_Version $make_version_line ${1}
