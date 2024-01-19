@@ -425,6 +425,8 @@ AddPackage() {
 	PKG_NAME=$3
 	REPO_URL="https://github.com/$4"
 	REPO_BRANCH=$5
+	SVN_REPO_NAME=$6
+	SVN_REPO_DIR=$7
 	[[ ${REPO_URL} =~ "${OP_AUTHOR}/${OP_REPO}" ]] && return 0
 
 	MKDIR ${PKG_DIR}
@@ -456,7 +458,11 @@ AddPackage() {
 		rm -rf "$4"
 	;;
 	svn)
-		svn checkout ${REPO_URL}/${PKG_NAME} ${PKG_NAME} > /dev/null 2>&1
+		SVN_REPO_URL="$(echo ${REPO_URL}/${SVN_REPO_NAME} | sed s/[[:space:]]//g)"
+		git clone -b ${REPO_BRANCH} ${SVN_REPO_URL} --depth 1 --single-branch > /dev/null 2>&1
+		cp ${SVN_REPO_NAME}/${SVN_REPO_DIR}/${PKG_NAME} ${PKG_NAME} -r
+		rm ${SVN_REPO_NAME} -rf
+		# svn checkout ${REPO_URL}/${PKG_NAME} ${PKG_NAME} > /dev/null 2>&1
 	;;
 	esac
 	if [[ -f ${PKG_NAME}/Makefile || -n $(ls -A ${PKG_NAME}) ]]
