@@ -11,7 +11,7 @@ Check_build_Version(){
         then
                 if [ "$pkg_old_version" != "" ]
                 then
-                        echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version" >>diff.log
+                        echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version" >> ${X_BUILD_TAG}_build_pkg_up.log 
                         echo ${pkg_name}:"$pkg_old_version>>$pkg_new_version"
                 else
                         echo "Add ${pkg_name}:${pkg_new_version}" >> ${X_BUILD_TAG}_build_pkg_up.log 
