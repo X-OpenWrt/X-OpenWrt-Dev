@@ -74,7 +74,6 @@ jobs:
 
     - name: Upload Test File to SharePoint
       uses: su-dont/share-point-uploader@v2.1
-      if: env.SharePoint=='true'
       with:
         sp_url: https://xinbyte.sharepoint.com/:f:/r/sites/OpenWrt
         sp_username: ${{ secrets.USERNAME }}
