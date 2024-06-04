@@ -1,0 +1,85 @@
+###########################################################
+#   Description: Compile OpenWrt by GitHub Actions        #
+#   Based on: https://github.com/P3TERX/Actions-OpenWrt   #
+#   Author: Xinb                                      #
+###########################################################
+
+name: SharePoint Test
+
+### 以下内容请保持不变 (请修改下方的 环境变量设置)
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      Release:
+        description: '是否上传到Github'
+        default: 'true'
+      SharePoint:
+        description: '是否上传到SharePoint'
+        default: 'true'
+      Tempoary_IP:
+        description: '固件 IP 地址 [可选]'
+        default: '192.168.2.100'
+      Tempoary_CONFIG:
+        description: '配置文件 [可选]'
+        default: 'x86_64-Z'
+      Tempoary_FLAG:
+        description: '固件名称后缀 [可选]'
+        default: 'Z'
+### 结束
+
+  #push:
+  #  branches: 
+  #    - master
+
+  #schedule:
+  #  - cron: 0 8 * * 5
+
+  #watch:
+  #  types: [started]
+
+### 环境变量设置
+env:
+# 编译时调用的 [.config] 文件名称
+  CONFIG_FILE: x86_64-Z
+# 源码仓库:分支
+  DEFAULT_SOURCE: coolsnowwolf/lede:master
+# 上传固件到 Github Releases
+  UPLOAD_RELEASES: true
+# 上传固件到 Github Artifacts
+  UPLOAD_ARTIFACTS: false
+# 上传 bin 文件夹到 Github Artifacts
+  UPLOAD_BIN_ARTIFACTS: false
+# 删除无用文件以增加编译空间
+  DELETE_USELESS_FILES: true
+# 删除早期的 workflow 任务
+  DELETE_OLD_WORKFLOW: true
+# Cache 加速编译
+  CACHE_ACCELERATE: true
+### 结束
+
+jobs:
+  Compile:
+    runs-on: ubuntu-20.04
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@main
+      with:
+        fetch-depth: 0
+    - name: Get current date & Set env
+      id: date
+      run: |
+        echo Test >> test.txt
+
+    - name: Upload Test File to SharePoint
+      uses: su-dont/share-point-uploader@v2.1
+      if: env.SharePoint=='true'
+      with:
+        sp_url: https://xinbyte.sharepoint.com/:f:/r/sites/OpenWrt
+        sp_username: ${{ secrets.USERNAME }}
+        sp_password: ${{ secrets.PASSWORD }}
+        sp_folder: /Shared Documents/OpenWrt/Dev_Upload/
+        sp_file_name: test.txt
+        file: test.txt
+
